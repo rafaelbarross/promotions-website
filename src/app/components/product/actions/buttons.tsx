@@ -62,7 +62,7 @@ export const ShareButton = ({
       `*CoyPromo - Super Promo:*\n\n` +
         `${title}\n\n` +
         `*R$ ${priceCurrent}* ~R$ ${priceOld}~\n\n` +
-        `https://coystore.vercel.app/promo/${id}`
+        `https://coypromo.vercel.app/promo/${id}`
     );
     window.open(`https://wa.me/?text=${text}`, "_blank");
   };

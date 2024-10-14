@@ -65,6 +65,7 @@ export default function CardProductGrid(props: ProductProps) {
         <PromoTimer date={props.date} />
       </div>
       <Link
+      scroll={false}
         href={`/promo/${formatTitleForUrl(props.titulo)}${props.id}`}
         // href={props.link.toLowerCase()}
         // target="target_blank"
@@ -83,6 +84,7 @@ export default function CardProductGrid(props: ProductProps) {
         <div>
           <CardTitle className="mb-4 flex items-center justify-between">
             <Link
+            scroll={false}
               title={props.titulo}
               href={`/promo/${formatTitleForUrl(props.titulo)}${props.id}`}
               className="h-[2.2rem] leading-relaxed font-medium transition-colors hover:text-primary text-xs sm:text-sm text-ellipsis overflow-hidden line-clamp-2"
