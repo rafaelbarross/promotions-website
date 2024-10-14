@@ -8,6 +8,8 @@ import { AuthContextProvider } from "./contexts/authContext/authContext";
 import { GlobalContextProvider } from "./contexts/globalContext/globalContext";
 import { ProductContextProvider } from "./contexts/productContext/productContext";
 import { Analytics } from "@vercel/analytics/react";
+import { Suspense } from "react";
+import { Spinner } from "./components/layout/ui-demo/spinner";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,6 +23,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  publisher: "CoyPromo",
   title: "CoyPromo",
   description: "As melhores promoções você encontra aqui!",
   openGraph: {
@@ -34,6 +37,7 @@ export const metadata: Metadata = {
         url: "https://coypromo.vercel.app/icon.jpg",
         alt: "Imagem de destaque para o CoyPromo",
         protocol: "https",
+        pathname: "https://coypromo.vercel.app/icon.jpg",
       },
     ],
   },
@@ -49,23 +53,25 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ProductContextProvider>
-          <GlobalContextProvider>
-            <AuthContextProvider>
-              <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-                <Analytics />
-                <Toaster />
-                <Header />
-                <main className="container mx-auto ">
-                  {/* <NavBarMenu/> */}
-                  {/* <Outlet /> */}
+        <Suspense fallback={<Spinner className="fixed left-[50%] top-[50%]" />}>
+          <ProductContextProvider>
+            <GlobalContextProvider>
+              <AuthContextProvider>
+                <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+                  <Analytics />
+                  <Toaster />
+                  <Header />
+                  <main className="container mx-auto ">
+                    {/* <NavBarMenu/> */}
+                    {/* <Outlet /> */}
 
-                  {children}
-                </main>
-              </ThemeProvider>
-            </AuthContextProvider>
-          </GlobalContextProvider>
-        </ProductContextProvider>
+                    {children}
+                  </main>
+                </ThemeProvider>
+              </AuthContextProvider>
+            </GlobalContextProvider>
+          </ProductContextProvider>
+        </Suspense>
       </body>
     </html>
   );

@@ -7,7 +7,6 @@ import { FaWhatsapp } from "react-icons/fa6";
 import { Loader2, PackageCheck } from "lucide-react";
 // components/ShareButton.tsx
 
-
 interface ShareButtonProps {
   title: string;
   priceCurrent: string;

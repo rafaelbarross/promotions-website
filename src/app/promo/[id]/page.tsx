@@ -1,6 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import type { Metadata } from "next";
+import type { Metadata, ResolvingMetadata } from "next";
 import StoreBanner from "@/app/components/layout/ui-demo/store-banner";
 import PromoTimer from "@/app/components/product/promo-timer";
 import Image from "next/image";
@@ -9,6 +9,8 @@ import { doc, getDoc } from "firebase/firestore";
 import { ProductProps } from "@/app/contexts/productContext/productContext";
 import { ShareButton } from "@/app/components/product/actions/buttons";
 import Link from "next/link";
+import Footer from "@/app/components/layout/ui-demo/footer";
+import NoPromo from "@/app/components/product/no-promo";
 
 interface Props {
   params: { id: string };
@@ -29,25 +31,62 @@ const fetchPromoById = async (id: string) => {
   }
 };
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
   const data = await fetchPromoById(params.id.slice(-20));
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  // Gerando a URL para a imagem OG
+  const imageUrl = `https://coypromo.vercel.app/api/og?img=${
+    data?.foto || "https://coypromo.vercel.app/icon.jpg"
+  }`;
+  //  const imageUrl = `http://localhost:3000/api/og?img=${data?.foto || "https://coypromo.vercel.app/icon.jpg"}`;
 
   return {
+    publisher: "CoyPromo",
     title: data?.titulo,
     description: data?.titulo,
+    applicationName: "CoyPromo",
+    twitter: {
+      title: data?.titulo.slice(0, 70),
+      description: data?.titulo.slice(0, 200),
+      card: "summary_large_image",
+      creator: "CoyPromo",
+      site: "https://coypromo.vercel.app/",
+      images: [
+        ...previousImages,
+        {
+          origin: "https://coypromo.vercel.app",
+          type: "image/jpg",
+          url: imageUrl,
+          secureUrl: imageUrl,
+          alt: data?.titulo,
+          width: 300,
+          height: 300,
+          pathname: imageUrl,
+        },
+      ],
+    },
     openGraph: {
-      title: data?.titulo,
+      title: data?.titulo.slice(0, 60),
       type: "website",
       url: `https://coypromo.vercel.app/${params.id}`,
-      description: "As melhores promoções você encontra aqui!",
+      description: "As melhores promoções!",
       siteName: "CoyPromo",
       images: [
+        ...previousImages,
         {
-          url: data?.foto ?? "https://coypromo.vercel.app/icon.jpg",
+          origin: "https://coypromo.vercel.app",
+          type: "image/jpg",
+          url: imageUrl,
+          secureUrl: imageUrl,
           alt: data?.titulo,
-          protocol: "https",
-          width: 1200, // Largura recomendada
-          height: 630, // Altura recomendada
+          width: 300,
+          height: 300,
+          pathname: data?.foto,
         },
       ],
     },
@@ -58,10 +97,13 @@ export default async function ProductDetails({ params }: Props) {
   const data = await fetchPromoById(params.id.slice(-20));
 
   if (!data) {
-    return <div>Produto nao encontrado</div>;
+    return <div className="mt-10">
+      <NoPromo/>
+      </div>;
   }
 
   return (
+    <>
     <div className="max-w-4x mx-aut border p-5 sm:p-10 bg-white shadow-lg rounded-lg mt-10 ">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
         <div className="flex-1 ">
@@ -116,7 +158,12 @@ export default async function ProductDetails({ params }: Props) {
             <PromoTimer date={data?.date} />
           </div>
           <div className="flex flex-col lg:flex-row gap-2">
-            <Link href={data.link} target="_blank" referrerPolicy="no-referrer" className="w-full lg:w-fit">
+            <Link
+              href={data.link}
+              target="_blank"
+              referrerPolicy="no-referrer"
+              className="w-full lg:w-fit"
+            >
               <Button size="lg" className="lg:flex- w-full ">
                 <ExternalLink className="mr-2 h-4 w-4" /> Pegar promoção
               </Button>
@@ -131,5 +178,7 @@ export default async function ProductDetails({ params }: Props) {
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
