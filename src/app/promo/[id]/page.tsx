@@ -41,7 +41,7 @@ export async function generateMetadata(
 
   // Gerando a URL para a imagem OG
   const imageUrl = `https://coypromo.vercel.app/api/og?img=${
-    data?.foto || "https://coypromo.vercel.app/icon.jpg"
+    data?.foto || "https://coypromo.vercel.app/icon.png"
   }`;
   //  const imageUrl = `http://localhost:3000/api/og?img=${data?.foto || "https://coypromo.vercel.app/icon.jpg"}`;
 

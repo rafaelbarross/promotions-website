@@ -63,7 +63,7 @@ export const AuthContextProvider = ({
     // Verifica se o email tem o domínio correto
     if (
       result!.user!.email! === "rsb8@aluno.ifal.edu.br" ||
-      result!.user!.email! === "gamer17.super@gmail.com"
+      result!.user!.email! === "eversoncoy1@gmail.com"
     ) {
       // console.log('Login bem sucedido');
       setUser(result.user); // Atualiza o estado do usuário aqui

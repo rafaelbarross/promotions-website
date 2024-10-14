@@ -18,11 +18,12 @@ import InputDemo from "./input-searh-demo";
 import { useEffect, useState } from "react";
 // import '../../../index.css'
 // import { House, Mail, Menu, Package, ShoppingBag, User, X } from "lucide-react";
-import { ChevronLeft, House, LogIn, Menu, Tags, X } from "lucide-react";
+import { ChevronLeft, House, LogIn, Menu, X } from "lucide-react";
 import UserMenu from "./user-menu-demo";
 import { UseGlobal } from "@/app/contexts/globalContext/globalContext";
 import { UserAuth } from "@/app/contexts/authContext/authContext";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const { showLogo, setShowLogoBar } = UseGlobal();
@@ -77,7 +78,7 @@ export default function Header() {
                           alt="Galdino logo"
                           className="w-56 user-select-none pointer-events-none "
                         /> */}
-                    <Tags className="h-6 w-6" />
+                           <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border"  src="/logo.svg"/>
                     <span className="">CoyPromo</span>
                   </div>
                   <span className="sr-only">CoyPromo</span>
@@ -101,14 +102,14 @@ export default function Header() {
                     href="#"
                     className={` hidde lg:flex items-center gap-2 font-semibold flex mx-5 `}
                   >
-                    <div className="flex w-28 gap-2">
+                    <div className="flex w-28 gap-2 items-center">
                       {/* <img
                       src={logo}
                       alt="Galdino logo"
                       className="w-56 user-select-none pointer-events-none "
                     /> */}
-                      <Tags className="h-6 w-6" />
-                      <span className="">CoyPromo</span>
+                     <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-8 h-8"  src="/logo.svg"/>
+                     <span className="font-bold">CoyPromo</span>
                     </div>
                     <span className="sr-only">CoyPromo</span>
                   </Link>
@@ -131,8 +132,8 @@ export default function Header() {
                     alt="Galdino logo"
                     className="w-36 user-select-none pointer-events-none "
                   /> */}
-                  <Tags className="h-6 w-6" />
-                  <span className="">CoyPromo</span>
+                   <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-10 h-10"  src="/logo.svg"/>
+                   <span className="font-bold">CoyPromo</span>
                   <span className="sr-only">CoyPromo</span>
                 </Link>
                 <SheetClose
@@ -201,8 +202,8 @@ export default function Header() {
             alt="Galdino logo"
             className="w-36 user-select-none pointer-events-none hidden lg:flex"
           /> */}
-          <Tags className="h-6 w-6 group-hover:animate-bounce" />
-          <span className="">CoyPromo</span>
+          <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-10 h-10"  src="/logo.svg"/>
+          <span className="font-bold">CoyPromo</span>
           <span className="sr-only">CoyPromo</span>
         </Link>
         <NavigationMenu className="hidden lg:flex">

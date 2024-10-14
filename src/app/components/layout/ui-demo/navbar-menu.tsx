@@ -19,6 +19,7 @@ import { ProductCreate } from "../../product/actions/buttons";
 import NoPromo from "../../product/no-promo";
 import NoPromoStore from "../../product/no-promo-store";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 // import InputDemo from "./input-searh-demo";
 // import { z } from "zod";
@@ -117,8 +118,8 @@ export default function NavBarMenu() {
                       showLogoBar ? "hidden" : "flex"
                     }`}
                   >
-                    <Tags className="h-6 w-6" />
-                    <span className="">CoyPromo -</span>
+                    <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-7 h-7"  src="/logo.svg"/>
+                    <span className="font-bold">CoyPromo</span>-
                   </div>
                   <div className="truncate font-medium flex items-center gap-2">
                     As melhores promoções!
