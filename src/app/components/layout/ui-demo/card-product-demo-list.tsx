@@ -60,7 +60,6 @@ export default function CardProductList(props: ProductProps) {
   return (
     <Card className="w-full sm:max-h-full grid grid-cols-2 sm:grid-cols-[10rem_1fr] relative">
       <Link
-        scroll={false}
         href={`/promo/${formatTitleForUrl(props.titulo)}${props.id}`}
         target="target_blank"
         referrerPolicy="no-referrer"
@@ -81,7 +80,6 @@ export default function CardProductList(props: ProductProps) {
             <CardTitle className="truncate">
               <Link
                 title={props.titulo}
-                scroll={false}
                 href={`/promo/${formatTitleForUrl(props.titulo)}${props.id}`}
                 className=" font-medium transition-colors hover:text-primary text-xs sm:text-sm truncate line-clamp- xl:text-lg  "
               >
