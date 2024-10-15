@@ -17,7 +17,7 @@ interface ShareButtonProps {
 export function ProductCreate() {
   const { isLoadingAction } = UseProduct();
   return (
-    <Button disabled={isLoadingAction} type="submit">
+    <Button disabled={isLoadingAction} type="submit" className="w-full">
       <DialogClose asChild>
         {isLoadingAction ? (
           <>
@@ -36,7 +36,7 @@ export function ProductCreate() {
 export function ProductUpdate() {
   const { isLoadingAction } = UseProduct();
   return (
-    <Button disabled={isLoadingAction} type="submit">
+    <Button disabled={isLoadingAction} type="submit" className="w-full">
       {isLoadingAction ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Atualizando
