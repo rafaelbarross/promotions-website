@@ -10,6 +10,7 @@ import { ProductContextProvider } from "./contexts/productContext/productContext
 import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { Spinner } from "./components/layout/ui-demo/spinner";
+import WelcomeDialog from "./components/layout/ui-demo/welcome-dialog";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
         url: "https://coypromo.vercel.app/og.png",
         alt: "Imagem de destaque para o CoyPromo",
         protocol: "https",
-        pathname: "https://coypromo.vercel.app/iog.png",
+        pathname: "https://coypromo.vercel.app/og.png",
       },
     ],
   },
@@ -58,6 +59,7 @@ export default function RootLayout({
             <GlobalContextProvider>
               <AuthContextProvider>
                 <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+                  <WelcomeDialog/>
                   <Analytics />
                   <Toaster />
                   <Header />

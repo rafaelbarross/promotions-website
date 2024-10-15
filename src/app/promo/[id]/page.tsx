@@ -40,10 +40,31 @@ export async function generateMetadata(
   const previousImages = (await parent).openGraph?.images || [];
 
   // Gerando a URL para a imagem OG
-  const imageUrl = `https://coypromo.vercel.app/api/og?img=${
-    data?.foto || "https://coypromo.vercel.app/og.png"
-  }`;
+  const imageUrl = `https://coypromo.vercel.app/api/og?img=${data?.foto}`;
   //  const imageUrl = `http://localhost:3000/api/og?img=${data?.foto || "https://coypromo.vercel.app/icon.jpg"}`;
+
+  if (!data) {
+    return {
+      publisher: "CoyPromo",
+      title: "CoyPromo",
+      description: "As melhores promoções você encontra aqui!",
+      openGraph: {
+        title: "CoyPromo",
+        type: "website",
+        url: "https://coypromo.vercel.app/",
+        description: "As melhores promoções você encontra aqui!",
+        siteName: "CoyPromo",
+        images: [
+          {
+            url: "https://coypromo.vercel.app/og.png",
+            alt: "Imagem de destaque para o CoyPromo",
+            protocol: "https",
+            pathname: "https://coypromo.vercel.app/og.png",
+          },
+        ],
+      },
+    };
+  }
 
   return {
     publisher: "CoyPromo",
