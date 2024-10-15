@@ -59,7 +59,7 @@ export default function Header() {
           {pathname.slice(0, 6) === "/promo" ? (
             <div className="flex lg:hidden">
               <Button
-                onClick={() => router.back()}
+                onClick={() => router.push("/")}
                 variant="outline"
                 size="icon"
                 className={`!px-2  ${showLogo ? "mr-5" : "mr-0"}`}
