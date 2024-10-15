@@ -74,7 +74,7 @@ export default function WelcomeDialog() {
             >
               <PiTiktokLogo
                 className="text-white font-black hover:scale-105 duration-300"
-                size={21}
+                size={24}
               />
             </a>
           </div>
