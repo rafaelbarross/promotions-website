@@ -72,14 +72,14 @@ export default function Header() {
                   href="#"
                   className={`   items-center gap-2 font-semibold flex mx-5 `}
                 >
-                  <div className="flex w-28 gap-2">
+                  <div className="flex w-28 gap-2 items-center">
                     {/* <img
                           src={logo}
                           alt="Galdino logo"
                           className="w-56 user-select-none pointer-events-none "
                         /> */}
-                           <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border"  src="/logo.svg"/>
-                    <span className="">CoyPromo</span>
+                          <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-8 h-8"  src="/logo.svg"/>
+                          <span className="font-bold">CoyPromo</span>
                   </div>
                   <span className="sr-only">CoyPromo</span>
                 </Link>

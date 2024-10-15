@@ -34,7 +34,7 @@ export async function GET(request: Request) {
             height={16}
             alt="CoyPromo Logo"
             tw="rounded-full border w-10 h-10"
-            src="https://coypromo.vercel.app/icon.png"
+            src="https://coypromo.vercel.app/og.png"
           />
           <span tw="font-bold ml-3">CoyPromo</span>
         </div>

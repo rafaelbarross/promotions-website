@@ -34,10 +34,10 @@ export const metadata: Metadata = {
     siteName: "CoyPromo",
     images: [
       {
-        url: "https://coypromo.vercel.app/icon.png",
+        url: "https://coypromo.vercel.app/og.png",
         alt: "Imagem de destaque para o CoyPromo",
         protocol: "https",
-        pathname: "https://coypromo.vercel.app/icon.png",
+        pathname: "https://coypromo.vercel.app/iog.png",
       },
     ],
   },
