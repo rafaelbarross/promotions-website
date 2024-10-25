@@ -54,7 +54,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Suspense fallback={<Spinner className="fixed left-[50%] top-[50%]" />}>
+        <Suspense fallback={<Spinner className="fixed left-[50%] top-[50%] text-primary" />}>
           <ProductContextProvider>
             <GlobalContextProvider>
               <AuthContextProvider>
