@@ -108,19 +108,20 @@ export const ProductContextProvider = ({
   const to = promo + "~";
 
   const fetchDocs = (initialQuery: Query) => {
+    setLoading(true);
     getDocs(initialQuery)
       .then((collections) => {
         updateState(collections);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
-      });
+      }).finally(() => setLoading(false));
   };
 
   useEffect(() => {
     setLastKey(undefined);
     setEmpty(false);
-    setLoading(true);
+    // setLoading(true);
     setProduct([]);
 
     let initialQuery;
@@ -190,7 +191,7 @@ export const ProductContextProvider = ({
   };
 
   const fetchMorePosts = () => {
-    setLoading(true);
+    // setLoading(true);
 
     let nextQuery;
 

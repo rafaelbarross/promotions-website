@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 import { Button } from "@/components/ui/button";
 import CardProductGrid from "./card-product-demo-grid";
@@ -32,16 +32,14 @@ export default function ListProduct({
           pageStart={0}
           loadMore={fetchMorePosts}
           hasMore={!isEmpty}
-          loader={<Spinner className="mx-auto" />}
+          loader={<Spinner className="bg-primary mx-auto" />}
         >
           <ul
             key={0}
             className="mt-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 sm:gap-4 justify-between pb-10"
           >
             {projects.map((card) => (
-              <>
-                <CardProductGrid key={card.id} {...card} />
-              </>
+              <CardProductGrid key={card.id} {...card} />
             ))}
           </ul>
         </InfiniteScroll>
@@ -50,7 +48,7 @@ export default function ListProduct({
           pageStart={0}
           loadMore={fetchMorePosts}
           hasMore={!isEmpty}
-          loader={<Spinner className="mx-auto" />}
+          loader={<Spinner className="bg-primary mx-auto" />}
         >
           <ul
             key={0}
