@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 /**
  * v0 by Vercel.
@@ -7,7 +7,7 @@
  */
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 
 import { ExternalLink } from "lucide-react";
 // import { Product } from "@/data/data";

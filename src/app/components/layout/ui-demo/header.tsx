@@ -22,7 +22,8 @@ import { ChevronLeft, House, LogIn, Menu, X } from "lucide-react";
 import UserMenu from "./user-menu-demo";
 import { UseGlobal } from "@/app/contexts/globalContext/globalContext";
 import { UserAuth } from "@/app/contexts/authContext/authContext";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useTransitionRouter } from "next-view-transitions";
 import Image from "next/image";
 
 export default function Header() {
@@ -47,7 +48,7 @@ export default function Header() {
   const cls = visible ? "visiblee" : "hiddenn";
 
   const pathname = usePathname();
-  const router = useRouter();
+  const router = useTransitionRouter();
 
   return (
     <header className={`bg-white sticky z-40  top-0 px-4  border-b ${cls}`}>
@@ -59,7 +60,12 @@ export default function Header() {
           {pathname.slice(0, 6) === "/promo" ? (
             <div className="flex lg:hidden">
               <Button
-                onClick={() => router.push("/")}
+                onClick={(e) => {
+                  e.preventDefault();
+                  router.push("/", {
+                    onTransitionReady: slideInOut,
+                  });
+                }}
                 variant="outline"
                 size="icon"
                 className={`!px-2  ${showLogo ? "mr-5" : "mr-0"}`}
@@ -78,8 +84,14 @@ export default function Header() {
                           alt="Galdino logo"
                           className="w-56 user-select-none pointer-events-none "
                         /> */}
-                          <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-8 h-8"  src="/logo.svg"/>
-                          <span className="font-bold">CoyPromo</span>
+                    <Image
+                      width={16}
+                      height={16}
+                      alt="CoyPromo Logo"
+                      className="rounded-full border w-8 h-8"
+                      src="/logo.svg"
+                    />
+                    <span className="font-bold">CoyPromo</span>
                   </div>
                   <span className="sr-only">CoyPromo</span>
                 </Link>
@@ -108,8 +120,14 @@ export default function Header() {
                       alt="Galdino logo"
                       className="w-56 user-select-none pointer-events-none "
                     /> */}
-                     <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-8 h-8"  src="/logo.svg"/>
-                     <span className="font-bold">CoyPromo</span>
+                      <Image
+                        width={16}
+                        height={16}
+                        alt="CoyPromo Logo"
+                        className="rounded-full border w-8 h-8"
+                        src="/logo.svg"
+                      />
+                      <span className="font-bold">CoyPromo</span>
                     </div>
                     <span className="sr-only">CoyPromo</span>
                   </Link>
@@ -132,8 +150,14 @@ export default function Header() {
                     alt="Galdino logo"
                     className="w-36 user-select-none pointer-events-none "
                   /> */}
-                   <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-10 h-10"  src="/logo.svg"/>
-                   <span className="font-bold">CoyPromo</span>
+                  <Image
+                    width={16}
+                    height={16}
+                    alt="CoyPromo Logo"
+                    className="rounded-full border w-10 h-10"
+                    src="/logo.svg"
+                  />
+                  <span className="font-bold">CoyPromo</span>
                   <span className="sr-only">CoyPromo</span>
                 </Link>
                 <SheetClose
@@ -202,7 +226,13 @@ export default function Header() {
             alt="Galdino logo"
             className="w-36 user-select-none pointer-events-none hidden lg:flex"
           /> */}
-          <Image width={16} height={16} alt="CoyPromo Logo" className="rounded-full border w-10 h-10"  src="/logo.svg"/>
+          <Image
+            width={16}
+            height={16}
+            alt="CoyPromo Logo"
+            className="rounded-full border w-10 h-10"
+            src="/logo.svg"
+          />
           <span className="font-bold">CoyPromo</span>
           <span className="sr-only">CoyPromo</span>
         </Link>
@@ -248,5 +278,45 @@ export default function Header() {
         {/* </div> */}
       </header>
     </header>
+  );
+}
+
+function slideInOut() {
+  document.documentElement.animate(
+    [
+      {
+        opacity: 1,
+        transform: "translate(0, 0)",
+      },
+      {
+        opacity: 0,
+        transform: "translate(-100px, 0)",
+      },
+    ],
+    {
+      duration: 400,
+      easing: "ease",
+      fill: "forwards",
+      pseudoElement: "::view-transition-old(root)",
+    }
+  );
+
+  document.documentElement.animate(
+    [
+      {
+        opacity: 0,
+        transform: "translate(100px, 0)",
+      },
+      {
+        opacity: 1,
+        transform: "translate(0, 0)",
+      },
+    ],
+    {
+      duration: 400,
+      easing: "ease",
+      fill: "forwards",
+      pseudoElement: "::view-transition-new(root)",
+    }
   );
 }

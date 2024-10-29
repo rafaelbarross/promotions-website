@@ -11,6 +11,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { Suspense } from "react";
 import { Spinner } from "./components/layout/ui-demo/spinner";
 import WelcomeDialog from "./components/layout/ui-demo/welcome-dialog";
+import { ViewTransitions } from 'next-view-transitions'
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -50,6 +51,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ViewTransitions >
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -76,5 +78,6 @@ export default function RootLayout({
         </Suspense>
       </body>
     </html>
+    </ViewTransitions>
   );
 }
