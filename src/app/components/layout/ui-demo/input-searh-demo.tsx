@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 
 /**
  * v0 by Vercel.
@@ -16,8 +16,8 @@ import { useReducer } from "react";
 import { Button } from "@/components/ui/button";
 import { UseProduct } from "@/app/contexts/productContext/productContext";
 import { UseGlobal } from "@/app/contexts/globalContext/globalContext";
-import { useRouter } from "next/navigation";
-
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useDebouncedCallback } from "use-debounce";
 // import { Button } from "@/components/ui/button";
 // import { SearchModal } from "./search-modal";
 
@@ -33,6 +33,9 @@ type Action = {
 export default function InputDemo() {
   const { setSearch, setShowLogo, showLogo } = UseGlobal();
   const { promo } = UseProduct();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const params = new URLSearchParams(searchParams);
 
   setSearch(promo);
 
@@ -78,34 +81,51 @@ export default function InputDemo() {
   // };
 
   const clearSearch = () => {
-    router.push(`/?promo=${encodeURIComponent("")}`);
+    const params = new URLSearchParams(searchParams);
+    if (params.has("promo")) {
+      params.delete("promo");
+    }
+    router.replace(`${pathname}?${params.toString()}`);
   };
+
+  // Inside the Search Component...
+  const handleSearch = useDebouncedCallback((term) => {
+    console.log(`Searching... ${term}`);
+
+    const params = new URLSearchParams(searchParams);
+    if (term) {
+      params.set("promo", term);
+    } else {
+      params.delete("promo");
+    }
+    router.replace(`${pathname}?${params.toString()}`);
+  }, 300);
 
   const handleHideMenu = () =>
     setTimeout(() => dispatch({ type: "HIDE_MENU" }), 200);
+
   return (
     <div className="relative w-full max-w-md flex items-end justify-end">
       <div className="w-full flex">
         <Input
+          defaultValue={searchParams.get("promo")?.toString()}
           onBlurCapture={handleHideMenu}
           type="search"
-          value={promo}
+          // value={promo}
           onChange={(e) => {
-            e.preventDefault();
-            // Navega para a página home com o termo de busca como search param
-            router.push(`/?promo=${encodeURIComponent(e.target.value)}`);
+            handleSearch(e.target.value);
           }}
-          placeholder="Pesquisar produtos"
-          className={` rounded-md border border-neutral-300 py-2 text-sm focus:!ring-[1px] focus:!ring-neutral-300 focus:border-none focus:outline-none duration-200 focus:px-2 search-input pl-2 pr-9 focus:pr-16 truncate`}
+          placeholder="Pesquisar promoções"
+          className={` rounded-md border border-neutral-300 py-2 text-sm focus:!ring-[1px] focus:!ring-neutral-30 focus:border-none focus:outline-none duration-200 focus:px-2 search-input pl-2 pr-9 focus:pr-16 truncate`}
           onFocus={handleFocus}
           onBlur={handleBlur}
           onClick={handleShowMenu} // Add onClick for consistency
         />
 
-        {showLogo ? (
+        {params.has("promo") || showLogo ? (
           <Button
+            size="icon"
             onClick={clearSearch}
-            variant="secondary"
             className={`absolute top-1/2 right-0 -translate-y-1/2`}
           >
             <X size={16} />
