@@ -61,8 +61,6 @@ export default function CardProductList(props: ProductProps) {
     <Card className="w-full sm:max-h-full grid grid-cols-2 sm:grid-cols-[10rem_1fr] relative">
       <Link
         href={`/promo/${formatTitleForUrl(props.titulo)}${props.id}`}
-        target="target_blank"
-        referrerPolicy="no-referrer"
         className="group overflow-hidden rounded-lg flex"
       >
         <StoreBanner className="sm:hidden" loja={props.loja} />
